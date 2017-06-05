@@ -17,35 +17,37 @@ git-cachet:
   git.latest:
     - name: https://github.com/cachethq/Cachet.git
     - rev: v2.0.4
-    - target: {{ rootdir }}
+    - target: {{ cachet.rootdir }}
     - user: {{ cachet.user }}
-    - group: {{ cachet.group }}
     - fetch_tags : True
     - require:
       - pkg: git
 
-{{ cachet.rootdir }}/.env:
+cachet-env:
   file.managed:
+    - name: {{ cachet.rootdir }}/.env
     - user: {{ cachet.user }}
     - group: {{ cachet.group }}
     - template: jinja
     - source: salt://cachet/templates/env.jinja
+    - context:
+      config: {{ cachet.config }}
     - mode: 440
 
 composer-cachet:
   composer.installed:
-    - name: {{ rootdir }}
+    - name: {{ cachet.rootdir }}
     - user: {{ cachet.user }}
     - no_dev: true
     - always_check: false
     - optimize: true
     - require:
-      - file: {{ rootdir }}/.env
+      - file: cachet-env
 
 cachet-app-install:
   cmd.run:
     - name: php artisan app:install
-    - cwd: {{ rootdir }}
+    - cwd: {{ cachet.rootdir }}
     - user: {{ cachet.user }}
     - group: {{ cachet.group }}
     - watch:

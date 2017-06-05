@@ -6,8 +6,8 @@ cachet:
   group: root
   config:
     app_env: production
-    app_debug: false
-    app_url: https: //localhost
+    app_debug: 'false'
+    app_url: https://localhost
     app_key: todo
     
     db_driver: mysql
@@ -19,19 +19,19 @@ cachet:
     cache_driver: memcached
     session_driver: memcached
     queue_driver: database
-    cachet_emoji: false
+    cachet_emoji: 'false'
     
     mail_driver: smtp
     mail_host: localhost
     mail_port: 25
-    mail_username: null
-    mail_password: null
-    mail_address: null
-    mail_name: null
+    mail_username: 'null'
+    mail_password: 'null'
+    mail_address: 'null'
+    mail_name: 'null'
     mail_encryption: tls
     
-    redis_host: null
-    redis_database: null
-    redis_port: null
+    redis_host: 'null'
+    redis_database: 'null'
+    redis_port: 'null'
     
     github_token: toto
